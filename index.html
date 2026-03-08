@@ -2,6 +2,39 @@
 <html lang="en">
 
 <head>
+  <style>
+    .markdown-section {
+      background: rgba(0,0,0,0.65);
+      padding: 32px;
+      border-radius: 6px;
+    }
+
+    .content {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    #bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      background-repeat: repeat-x;
+      background-position: top center;
+      background-size: auto 120vh;
+    }
+
+    image-rendering: pixelated;
+  </style>
   <meta charset="utf-8">
   <meta name="viewport"
     content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
@@ -16,6 +49,13 @@
 </head>
 
 <body>
+  <div id="bg">
+    <div class="bg-layer" id="bg0"></div>
+    <div class="bg-layer" id="bg1"></div>
+    <div class="bg-layer" id="bg2"></div>
+    <div class="bg-layer" id="bg3"></div>
+  </div>
+  
   <div id="app"></div>
 
   <script>
@@ -48,5 +88,88 @@
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
 
+  <script>
+    const pageBackgrounds = {
+  "/": [
+    {img:"ImageAssets/bg/Title_1.png", speed:0},
+    {img:"ImageAssets/bg/Title_2.png", speed:0.3},
+    {img:"ImageAssets/bg/Title_3.png", speed:0.6},
+    {img:"ImageAssets/bg/Title_4.png", speed:1}
+  ],
+
+  "/InitialSetup/": [
+      {img:"ImageAssets/bg/Camp_1.png", speed:0},
+      {img:"ImageAssets/bg/Camp_2.png", speed:0.3},
+      {img:"ImageAssets/bg/Camp_3.png", speed:0.6},
+      {img:"ImageAssets/bg/Camp_4.png", speed:1}
+    ]
+  };
+
+  function setBackground(path){
+    const layers = pageBackgrounds[path] || pageBackgrounds["/"];
+
+    layers.forEach((l,i)=>{
+        const el = document.getElementById("bg"+i);
+        el.style.backgroundImage = `url(${l.img})`;
+        el.dataset.speed = l.speed;
+    });
+  }
+
+  window.$docsify.plugins = [
+    function(hook){
+      hook.doneEach(function(){
+        setBackground(location.hash.slice(1) || "/");
+      });
+    }
+  ];
+  </script>
+
+  <script>
+    function updateBackground(){
+
+    const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+    const scroll = window.scrollY;
+
+    for(let i=0;i<4;i++){
+
+        const layer = document.getElementById("bg"+i);
+        const speed = parseFloat(layer.dataset.speed || 0);
+
+        if(speed === 0){
+            layer.style.transform = "translateY(0px)";
+            continue;
+        }
+
+        const target =
+            (scroll / maxScroll) * window.innerHeight * speed;
+
+        const snapped = Math.round(target);
+
+        layer.style.transform =
+            `translateY(${snapped}px)`;
+      }
+  }
+
+  window.addEventListener("scroll", updateBackground);
+  </script>
+
+  <script>
+    function updateScale(){
+
+    const scale = window.innerHeight / 120;
+
+    document.querySelectorAll(".bg-layer")
+      .forEach(layer=>{
+        layer.style.backgroundSize =
+            `auto ${148*scale}px`;
+      });
+    }
+
+    window.addEventListener("resize", updateScale);
+    updateScale();
+  </script>
+  
 </body>
 </html>
