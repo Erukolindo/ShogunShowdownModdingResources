@@ -1,0 +1,9 @@
+{
+    "Id": "TemplateMod",
+    "DisplayName": "Template Mod",
+    "Author": "Erukolindo",
+    "Version": "0.1.0",
+    "LoadAfter": [ "ShogunShowdownContentLoader" ],
+    "AssemblyName": "TemplateMod.dll",
+    "EntryMethod": "TemplateMod.Main.Load"
+}
