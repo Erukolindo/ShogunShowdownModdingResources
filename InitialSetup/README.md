@@ -14,12 +14,12 @@ There are a few things you need to get ready before you can begin:
 ## Workspace Setup
 The simplest mod consists of a folder containing only two files: Info.json, and a code library.
 1. Go into your Shogun Showdown mods folder (It will be in the game's directory, the same one you set in Unity Mod Manager)
-![](/ImageAssets/img_ModsFolder.png)
+![](../ImageAssets/img_ModsFolder.png)
 2. Create a new folder there, give it any name you want. This will be your mod's folder.
-![](/ImageAssets/img_ModFolder.png)
-3. Create a new Unity project, using the default 2D template.![](/ImageAssets/img_AssetBundler.png)
+![](../ImageAssets/img_ModFolder.png)
+3. Create a new Unity project, using the default 2D template.![](../ImageAssets/img_AssetBundler.png)
 4. In the project, create a new C# script "BuildBundles", with the following code:
-```
+```csharp
 using UnityEditor;
 
 #if UNITY_EDITOR
@@ -35,27 +35,27 @@ public class BuildBundles
 ```
 5. If you're going to follow the next parts of this tutorial immediately, keep this Unity project open, otherwise you can close it for now.
 6. Create a new C# Library project in your code editor of choice.
-	- In Visual Studio it's "Class Library (.NET Framework)".![](/ImageAssets/img_ClassLibrary.png)
+	- In Visual Studio it's "Class Library (.NET Framework)".![](../ImageAssets/img_ClassLibrary.png)
 	- Set your project's name, leave the other settings unchanged.
 6. Add necessary References: ShogunShowdownContentLoader.dll, 0Harmony.dll, UnityModManager.dll, Assembly-CSharp.dll, UnityEngine.dll, UnityEngine.CoreModule.dll and UnityEngine.AssetBundleModule.dll
 	- In Visual Studio: Project -> Add Reference -> Browse... and select these .dll files.
-	- Then, in the Browse tab of the Reference Manager window, toggle each of them on, and close the window with "OK"![](/ImageAssets/img_ReferenceLibraries.png)
+	- Then, in the Browse tab of the Reference Manager window, toggle each of them on, and close the window with "OK"![](../ImageAssets/img_ReferenceLibraries.png)
 	- Finally, in Solution Explorer, open "References" and select the seven libraries added, change their "Copy Local" to false.
-	  ![](/ImageAssets/img_CopyLocal.png)
+	  ![](../ImageAssets/img_CopyLocal.png)
 7. For convenience, it's a good idea to switch the build location to your mod's folder. This way, you can test changes in game immediately after building.
-	- In Visual Studio: Project -> (ProjectName) Properties -> Build -> Output path![](/ImageAssets/img_OutputPath.png)
+	- In Visual Studio: Project -> (ProjectName) Properties -> Build -> Output path![](../ImageAssets/img_OutputPath.png)
 ## Backend Connections
 1. Create the core script (or rename the one created by default). Call it something like "Master" or "Main"
 	- If you're renaming an existing script, make sure that both the class name within the file, and the file itself are renamed.
-	  ![](/ImageAssets/img_RenamingA.png)![](/ImageAssets/img_RenamingB.png)
+	  ![](../ImageAssets/img_RenamingA.png)![](../ImageAssets/img_RenamingB.png)
 2. At the start of the script add
-```
+```csharp
 using HarmonyLib;
 using UnityModManagerNet;
 using UnityEngine;
 ```
 3. Then inside the class:
-```
+```csharp
 static AssetBundle bundle = null;
 static bool Load(UnityModManager.ModEntry modEntry)
 {
@@ -84,7 +84,7 @@ static bool Load(UnityModManager.ModEntry modEntry)
 	- Any temporary files that appear (such as .pdb or CACHE files) can be safely ignored, though you should delete them before compressing the mod to upload it.
 6. Still in the mod's folder, create an empty text file "Info.json" (make sure it's not something like "Info.json.txt"), or copy one from a different mod.
 7. Open that file in any text editor and fill it out like this:
-```
+```json
 {
     "Id": "TemplateMod",
     "DisplayName": "Template Mod",
@@ -101,8 +101,8 @@ Where:
 - LoadAfter - keep this one exactly as in the example, this ensures Content Loader is ready to receive this mod's data.
 - AssemblyName - the name of the mod's .dll file.
 - EntryMethod - the path to the Load function in your code. The format is "\<namespace>.\<class>.\<function>"
-  ![](/ImageAssets/img_EntryMethod.png)
-8. Save the file, and launch Shogun Showdown. If you've done everything right, you should see something like this:![](/ImageAssets/img_SuccessfulSetup.png)
+  ![](../ImageAssets/img_EntryMethod.png)
+8. Save the file, and launch Shogun Showdown. If you've done everything right, you should see something like this:![](../ImageAssets/img_SuccessfulSetup.png)
     All loaded mods, including the one you created, showing their status as "Active", with no errors.
 
 At this point your mod is fully integrated and ready for you to start the modding proper, the details of which will be covered in the following parts of the tutorial.
