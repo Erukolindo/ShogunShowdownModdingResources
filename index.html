@@ -91,71 +91,84 @@
   <script>
     const pageBackgrounds = {
   "/": [
-    {img:"ImageAssets/bg/Title_1.png", speed:0},
-    {img:"ImageAssets/bg/Title_2.png", speed:0.3},
-    {img:"ImageAssets/bg/Title_3.png", speed:0.6},
-    {img:"ImageAssets/bg/Title_4.png", speed:1}
+    {img:"ImageAssets/bg/Title_1.png", speed:6},
+    {img:"ImageAssets/bg/Title_2.png", speed:10},
+    {img:"ImageAssets/bg/Title_3.png", speed:14},
+    {img:"ImageAssets/bg/Title_4.png", speed:28}
   ],
 
   "/InitialSetup/": [
-      {img:"ImageAssets/bg/Camp_1.png", speed:0},
-      {img:"ImageAssets/bg/Camp_2.png", speed:0.3},
-      {img:"ImageAssets/bg/Camp_3.png", speed:0.6},
-      {img:"ImageAssets/bg/Camp_4.png", speed:1}
+      {img:"ImageAssets/bg/Camp_1.png", speed:4},
+      {img:"ImageAssets/bg/Camp_2.png", speed:10},
+      {img:"ImageAssets/bg/Camp_3.png", speed:14},
+      {img:"ImageAssets/bg/Camp_4.png", speed:28}
     ]
   };
 
   function setBackground(path){
-    const layers = pageBackgrounds[path] || pageBackgrounds["/"];
+
+    let key = path;
+
+    if(!pageBackgrounds[key]){
+        const dir = path.replace(/[^\/]+$/, "");
+        key = pageBackgrounds[dir] ? dir : "/";
+    }
+
+    console.log("Final path key: " + key);
+    
+    const layers = pageBackgrounds[key];
 
     layers.forEach((l,i)=>{
         const el = document.getElementById("bg"+i);
         el.style.backgroundImage = `url(${l.img})`;
-        el.dataset.speed = l.speed;
+        el.dataset.range = l.range;
     });
-  }
+}
 
   window.$docsify.plugins = [
-    function(hook){
-      hook.doneEach(function(){
-        setBackground(location.hash.slice(1) || "/");
-      });
-    }
-  ];
-  </script>
+  function (hook, vm) {
 
-  <script>
+    hook.doneEach(function () {
+
+      const path = vm.route.path || "/";
+
+      console.log("Current page path: " + path);
+      setBackground(path);
+
+      updateScale();
+      updateBackground();
+    });
+
+  }
+];
+    
     function updateBackground(){
 
-    const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
+  const maxScroll =
+    document.documentElement.scrollHeight - window.innerHeight;
 
-    const scroll = window.scrollY;
+  const scroll = window.scrollY;
 
-    for(let i=0;i<4;i++){
+  const scale = window.innerHeight / 120;
 
-        const layer = document.getElementById("bg"+i);
-        const speed = parseFloat(layer.dataset.speed || 0);
+  for(let i=0;i<4;i++){
 
-        if(speed === 0){
-            layer.style.transform = "translateY(0px)";
-            continue;
-        }
+    const layer = document.getElementById("bg"+i);
+    const range = parseFloat(layer.dataset.range || 0);
 
-        const target =
-            (scroll / maxScroll) * window.innerHeight * speed;
+    const progress = maxScroll > 0 ? scroll / maxScroll : 0;
 
-        const snapped = Math.round(target);
+    const pixelOffset = Math.round(progress * range);
 
-        layer.style.transform =
-            `translateY(${snapped}px)`;
-      }
+    const displayOffset = pixelOffset * scale;
+
+    layer.style.transform =
+      `translateY(${-displayOffset}px)`;
   }
+}
 
   window.addEventListener("scroll", updateBackground);
-  </script>
-
-  <script>
+    
     function updateScale(){
 
     const scale = window.innerHeight / 120;
@@ -167,8 +180,10 @@
       });
     }
 
-    window.addEventListener("resize", updateScale);
-    updateScale();
+    window.addEventListener("resize", ()=>{
+  updateScale();
+  updateBackground();
+});
   </script>
   
 </body>
