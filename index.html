@@ -26,11 +26,9 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
       image-rendering: pixelated;
       background-repeat: repeat-x;
       background-position: top center;
-      background-size: auto 120vh;
     }
 
     image-rendering: pixelated;
@@ -171,14 +169,16 @@
     
     function updateScale(){
 
-    const scale = window.innerHeight / 120;
+  const scale = window.innerHeight / 120;
 
-    document.querySelectorAll(".bg-layer")
-      .forEach(layer=>{
-        layer.style.backgroundSize =
-            `auto ${148*scale}px`;
-      });
-    }
+  const scaledHeight = 148 * scale;
+
+  document.querySelectorAll(".bg-layer")
+    .forEach(layer=>{
+        layer.style.height = `${scaledHeight}px`;
+        layer.style.backgroundSize = `auto ${scaledHeight}px`;
+    });
+}
 
     window.addEventListener("resize", ()=>{
   updateScale();
