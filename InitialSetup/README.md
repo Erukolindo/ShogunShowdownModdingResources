@@ -1,6 +1,8 @@
 # Initial Setup
 This first part of the tutorial goes over the setup required to start modding Shogun Showdown with the help of Content Loader - by the end of it, you'll learn how to create a base mod, which loads into the game and connects with Content Loader. Next parts of the tutorial will go over using that connection to add new things into the game.
 
+Do note that for all the effort I put into streamlining the process, it still requires some understanding of coding in C#.
+
 ## Preparations
 There are a few things you need to get ready before you can begin:
 1. A copy of Shogun Showdown, setup with Unity Mod Manager, and with Content Loader installed. If you somehow don't have that yet, follow this tutorial by TheRotBot: https://youtu.be/Zuh_wjUYw-c
@@ -35,18 +37,19 @@ There are a few things you need to get ready before you can begin:
     }
     #endif
     ```
-5. If you're going to follow the next parts of this tutorial immediately, keep this Unity project open, otherwise you can close it for now.
-6. Create a new C# Library project in your code editor of choice.
+5. In the Assets folder create a new folder called AssetBundles.
+6. If you're going to follow the next parts of this tutorial immediately, keep this Unity project open, otherwise you can close it for now.
+7. Create a new C# Library project in your code editor of choice.
 	- In Visual Studio it's "Class Library (.NET Framework)".  
 	![](../ImageAssets/img_ClassLibrary.png)
 	- Set your project's name, leave the other settings unchanged.
-6. Add necessary References: ShogunShowdownContentLoader.dll, 0Harmony.dll, UnityModManager.dll, Assembly-CSharp.dll, UnityEngine.dll, UnityEngine.CoreModule.dll and UnityEngine.AssetBundleModule.dll
+8. Add necessary References: ShogunShowdownContentLoader.dll, 0Harmony.dll, UnityModManager.dll, Assembly-CSharp.dll, UnityEngine.dll, UnityEngine.CoreModule.dll and UnityEngine.AssetBundleModule.dll
 	- In Visual Studio: Project -> Add Reference -> Browse... and select these .dll files.
 	- Then, in the Browse tab of the Reference Manager window, toggle each of them on, and close the window with "OK"  
 	![](../ImageAssets/img_ReferenceLibraries.png)
 	- Finally, in Solution Explorer, open "References" and select the seven libraries added, change their "Copy Local" to false.  
 	![](../ImageAssets/img_CopyLocal.png)
-7. For convenience, it's a good idea to switch the build location to your mod's folder. This way, you can test changes in game immediately after building.
+9. For convenience, it's a good idea to switch the build location to your mod's folder. This way, you can test changes in game immediately after building.
 	- In Visual Studio: Project -> (ProjectName) Properties -> Build -> Output path  
 	![](../ImageAssets/img_OutputPath.png)
 
@@ -59,6 +62,9 @@ There are a few things you need to get ready before you can begin:
     using HarmonyLib;
     using UnityModManagerNet;
     using UnityEngine;
+    using ContentLoader;
+    using ContentLoader.DataClasses;
+    using TileEnums;
     ```
 3. Then inside the class:
     ```csharp
