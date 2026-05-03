@@ -22,16 +22,13 @@ For the skill icon sprite, the guidelines are:
 	3. Pixels per Unit: 32
 	4. Filter: Point (no filter)
 	5. Format: RGBA 32 bit  
-  
 ![](../ImageAssets/img_GeneralSpriteSettingsSkill.png)
 
 Keep all the sprites selected and add them to the asset bundle: at the bottom of the inspector, you should see the AssetBundle dropdown (if you don't, click the double line to expand the collapsible section there). Open the dropdown, and select your asset bundle name, or add it if you're setting up assets for the first time. Use the asset bundle name you wrote at the beginning of the Load function in the Initial Setup tutorial.  
-  
 ![](../ImageAssets/img_BundleCollapsed.png)  
 ![](../ImageAssets/img_BundleExpanded.png)
 
 Once that is all set up, click Assets -> Build Asset Bundles. When that process finishes, copy your asset bundle and its .manifest file from AssetBundles to your mod's folder.  
-  
 ![](../ImageAssets/img_BundleAndManifest.png)
 
 ## General Setup
