@@ -666,3 +666,5 @@ private void CompleteBet()
 }
 ```
 I'm using pastTriggers in PickUp and Remove so that if you load from a saved game *after* completing a bet, you immediately get the doubled healing and enemies aren't buffed. "skipNextDoubling" in DoubleHealing is also an important element - without it the skill would try to double its own healing, at best making any healing fully restore the hero's health, at worst creating an infinite loop.
+
+You can view the final form of the skill script files here: https://github.com/Erukolindo/ShogunShowdownModdingResources/tree/master/NewSkills/Resources
