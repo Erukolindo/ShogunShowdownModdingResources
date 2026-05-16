@@ -24,7 +24,7 @@ Then, add the icons to the asset bundle: keep all the sprites selected. At the b
 ![](../ImageAssets/img_BundleCollapsed.png)  
 ![](../ImageAssets/img_BundleExpanded.png)
 
-Once that is all set up, click Assets -> Build Asset Bundles. When that process finishes, copy your asset bundle and its .manifest file from AssetBundles to your mod's folder.
+Once that is all set up, click Assets -> Build Asset Bundles. When that process finishes, copy your asset bundle and its .manifest file from AssetBundles to your mod's folder.  
 ![](../ImageAssets/img_BundleAndManifest.png)
 
 ## Vanilla Quests
