@@ -1,3 +1,4 @@
 - [Initial Setup](/InitialSetup/README)
 - [New Tiles](/NewTiles/README)
 - [New Skills](/NewSkills/README)
+- [New Quests](/NewQuests/README)
