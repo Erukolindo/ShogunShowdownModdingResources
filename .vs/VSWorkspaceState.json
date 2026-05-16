@@ -1,10 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\NewQuests",
     "\\NewSkills",
     "\\NewSkills\\Resources",
     "\\NewTiles"
   ],
-  "SelectedNode": "\\NewSkills\\README.md",
+  "SelectedNode": "\\NewQuests\\README.md",
   "PreviewInSolutionExplorer": false
 }

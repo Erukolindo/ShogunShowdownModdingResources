@@ -11,7 +11,7 @@ Skills require a skill ID, an unlock ID, and a sprite. Just like with tiles, loo
 	- 50XX - Artifact skills (appear only in the Moonlit Port)
 	- 90XX - Merchant skills (appear in every shop)
 	Note this down for future reference as your Skill ID.
-2. Go into the "Quests/Unlocks" worksheet, select a **NEGATIVE** ID value that's not used by any unlock listed there. Positive values sometimes just don't work, and I haven't investigated why, since negative ones are perfectly fine. I decided to start tile unlocks from -1000, but that's not a requirement. Note it down for future reference as your Unlock ID
+2. Go into the "Quests/Unlocks" worksheet, select a **NEGATIVE** ID value that's not used by any unlock listed there. Positive values sometimes just don't work, and I haven't investigated why, since negative ones are perfectly fine. I decided to start skill unlocks from -2000, but that's not a requirement. Note it down for future reference as your Unlock ID
 
 For the skill icon sprite, the guidelines are:
 1. Make a sprite which fits within 16x16 pixels. For visual clarity you want to use the color palette of the associated skill type (except for Artifact skills, since they are all unique).
